@@ -6,7 +6,7 @@ interface State {
     result: string,
 }
 
-class NumberBaseballClass extends Component<{}, State> {
+class WordRelayClass extends Component<{}, State> {
     state = {
         word: '람',
         value: '',
@@ -60,4 +60,4 @@ class NumberBaseballClass extends Component<{}, State> {
     }
 }
 
-export default NumberBaseballClass;
+export default WordRelayClass;
