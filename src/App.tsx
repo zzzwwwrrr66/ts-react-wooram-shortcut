@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
+import Gugudan from './view/Gugudan';
+import GugudanClass from './view/GugudanClass';
+import WordRelayClass from './view/WordRelay/Class';
+import WordRelayHook from './view/WordRelay/Hook';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>wooram ts</h1>
+      <Gugudan />
+      <GugudanClass />
+      <h2>WordRelay</h2>
+      <h3>WordRelay hook</h3>
+      <WordRelayHook />
+      <h3>WordRelay class</h3>
+      <WordRelayClass />
+    </>
   );
 }
 
