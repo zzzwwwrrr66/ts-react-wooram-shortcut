@@ -4,6 +4,8 @@ import Gugudan from './view/Gugudan';
 import GugudanClass from './view/GugudanClass';
 import WordRelayClass from './view/WordRelay/Class';
 import WordRelayHook from './view/WordRelay/Hook';
+import NumberBaseballHooks from './view/NumberBaseball/Hook';
+import NumberBaseballClass from './view/NumberBaseball/Class';
 function App() {
   return (
     <>
@@ -15,6 +17,11 @@ function App() {
       <WordRelayHook />
       <h3>WordRelay class</h3>
       <WordRelayClass />
+
+      <h2>number baseball</h2>
+      <h3>WordRelayClassHooks</h3>
+      <NumberBaseballHooks/>
+      <NumberBaseballClass/>
     </>
   );
 }

@@ -1,4 +1,10 @@
 import React, { createRef } from "react";
+function getNumbers() {
+  const candidate = [1,2,3,4,5,6,7,8,9];
+  const array = candidate;
+  
+  return array;
+}
 
 interface IState {
   test?: string,
@@ -6,6 +12,7 @@ interface IState {
   second: number,
   value: string,
   result: string,
+  functionReturnNumberArray: number[], // 함수를 설정하더라도 return 값을 타입으로 해주면 가능
 }
 
 class CommonClass extends React.Component<{}, IState> {
@@ -14,6 +21,7 @@ class CommonClass extends React.Component<{}, IState> {
     second: Math.ceil(Math.random() * 9),
     value: '',
     result: '',
+    functionReturnNumberArray: getNumbers(),
   };
 
   // onSubmit Event
@@ -48,6 +56,7 @@ class CommonClass extends React.Component<{}, IState> {
             value={this.state.value}
             onChange={this.onChange}
           />
+          <button type="submit">입력</button>
         </form>
       </>
     );

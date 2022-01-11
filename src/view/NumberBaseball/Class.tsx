@@ -1,63 +1,116 @@
 import React, { Component, createRef } from 'react';
+import TryClass from './TryClass';
 
-interface State {
-    word: string,
-    value: string,
-    result: string,
+function getNumbers() { // 숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
+  const candidate = [1,2,3,4,5,6,7,8,9];
+  const array = [];
+  for (let i = 0; i < 4; i += 1) {
+    const chosen = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
+    array.push(chosen);
+  }
+  return array;
 }
 
-class WordRelayClass extends Component<{}, State> {
-    state = {
-        word: '람',
-        value: '',
-        result: '',
-    };
+interface ITryies {
+  try: string,
+  result: string,
+}
+interface IState {
+  result: string,
+  value: string,
+  answer: number[],
+  tries: ITryies[],
+}
 
-    onSubmitForm = (e: React.FormEvent) => {
-        e.preventDefault();
-        const input = this.onRefInput.current;
-        if (this.state.word[this.state.word.length - 1] === this.state.value[0]) {
-            this.setState({
-                result: '딩동댕',
-                word: this.state.value,
-                value: '',
-            });
-            if (input) {
-                input.focus();
-            }
-        } else {
-            this.setState({
-                result: '땡',
-                value: '',
-            });
-            if (input) {
-                input.focus();
-            }
+class NumberBaseballClass extends Component<{}, IState> {
+  state = {
+    result: '',
+    value: '',
+    answer: getNumbers(), // ex: [1,3,5,7]
+    tries : [], // push 쓰면 안 돼요
+  };
+
+  onSubmitForm = (e: React.FormEvent) => {
+    const { value, tries, answer } = this.state;
+    e.preventDefault();
+    if (value === answer.join('')) {
+      this.setState((prevState) => {
+        return {
+          result: '홈런!',
+          tries: [...prevState.tries, { try: value, result: '홈런!' }],
         }
-    };
-
-    onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ value: e.currentTarget.value });
-    };
-
-    onRefInput = createRef<HTMLInputElement>();
-
-    render() {
-        return (
-            <>
-                <div>{this.state.word}</div>
-                <form onSubmit={this.onSubmitForm}>
-                    <input
-                        ref={this.onRefInput}
-                        value={this.state.value}
-                        onChange={this.onChangeInput}
-                    />
-                    <button>클릭!!!</button>
-                </form>
-                <div>{this.state.result}</div>
-            </>
-        );
+      });
+      alert('게임을 다시 시작합니다!');
+      this.setState({
+        value: '',
+        answer: getNumbers(),
+        tries: [],
+      });
+      if(this.inputRef.current) this.inputRef.current.focus();
+      
+    } else { // 답 틀렸으면
+      const answerArray = value.split('').map((v) => parseInt(v));
+      let strike = 0;
+      let ball = 0;
+      if (tries.length >= 9) { // 10번 이상 틀렸을 때
+        this.setState({
+          result: `10번 넘게 틀려서 실패! 답은 ${answer.join(',')}였습니다!`,
+        });
+        alert('게임을 다시 시작합니다!');
+        this.setState({
+          value: '',
+          answer: getNumbers(),
+          tries: [],
+        });
+        if(this.inputRef.current) this.inputRef.current.focus();
+      } else {
+        for (let i = 0; i < 4; i += 1) {
+          if (answerArray[i] === answer[i]) {
+            strike += 1;
+          } else if (answer.includes(answerArray[i])) {
+            ball += 1;
+          }
+        }
+        this.setState((prevState) => {
+          return {
+            tries: [...prevState.tries, { try: value, result: `${strike} 스트라이크, ${ball} 볼입니다`}],
+            value: '',
+          };
+        });
+        if(this.inputRef.current) this.inputRef.current.focus();
+      }
     }
+  };
+
+  onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(this.state.answer);
+    this.setState({
+      value: e.target.value,
+    });
+  };
+
+  inputRef = createRef<HTMLInputElement>(); // this.inputRef
+
+  render() {
+    const { result, value, tries } = this.state;
+    return (
+      <>
+        <h1>{result}</h1>
+        <form onSubmit={this.onSubmitForm}>
+          <input ref={this.inputRef} maxLength={4} value={value} onChange={this.onChangeInput} />
+          <button type='submit'>입력</button>
+        </form>
+        <div>시도: {tries.length}</div>
+        <ul>
+          {tries.map((v, i) => {
+            return (
+              <TryClass key={`${i + 1}차 시도 :`} tryInfo={v} />
+            );
+          })}
+        </ul>
+      </>
+    );
+  }
 }
 
-export default WordRelayClass;
+export default NumberBaseballClass; // import NumberBaseballClass;
