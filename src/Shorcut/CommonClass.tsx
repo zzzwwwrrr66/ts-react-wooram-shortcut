@@ -6,6 +6,9 @@ function getNumbers() {
   return array;
 }
 
+// 값뒤의 ! 는 값을 확신할때 사용 
+// 값뒤의 ? 는 값을 확신할수 없을때 사용
+
 interface IState {
   test?: string,
   first: number,
@@ -16,7 +19,7 @@ interface IState {
 }
 
 class CommonClass extends React.Component<{}, IState> {
-  state = {
+  state:IState = { // 빈배열일때 오류가 나올수 있으므로 state: Itype을 설정해준다. => constructor->super부터 가는 state는 오류가 안생긴다.
     first: Math.ceil(Math.random() * 9),
     second: Math.ceil(Math.random() * 9),
     value: '',

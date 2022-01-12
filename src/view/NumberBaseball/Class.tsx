@@ -23,7 +23,8 @@ interface IState {
 }
 
 class NumberBaseballClass extends Component<{}, IState> {
-  state = {
+  
+  state:IState = { 
     result: '',
     value: '',
     answer: getNumbers(), // ex: [1,3,5,7]
