@@ -13,13 +13,24 @@ const rspCoords = {
 
 // # typeof
 // rspCoords 가 변한다고 해도 이값은 rspCoords 을 따라가므로 밑의 방법을 많이쓴다
-// type 은 변하지 않는값을 사용??
+// type 과 interface가 다른점은 type은 확장(extends)를 할수 없는 점이다
 // value 만 가져오고싶을때
 type imgCoords = typeof rspCoords[keyof typeof rspCoords];
 // key 만 가져오고싶을떄
 type imgCoords3 = keyof typeof rspCoords;
 // rspCoords 가 변하면 이값도 변해야 하므로 위의 방법이 더좋다
 type imgCoords2 = "0" | "-142px" | "-284px";
+
+// 객체키가 있는지 확인, return값을 지정안해줘도 오류가나지 않는 이유는 매개변수에서 이미 값을 할당해 줬기 때문이다.
+function getProperty<T, O extends keyof T>(obj: T, key: O) {
+  return obj[key];  
+}
+let testObj = { a: 1, b: 2, c: 3 };
+
+getProperty(testObj, "a"); // okay
+//getProperty(testObj, "z"); // error: "z"는 "a", "b", "c" 속성에 해당하지 않습니다.
+
+let obj = { a: 1, b: 2, c: 3 };
 
 export default function CommonHook() {
   
