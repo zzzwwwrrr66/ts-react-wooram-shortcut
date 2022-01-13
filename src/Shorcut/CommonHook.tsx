@@ -14,7 +14,10 @@ const rspCoords = {
 // # typeof
 // rspCoords 가 변한다고 해도 이값은 rspCoords 을 따라가므로 밑의 방법을 많이쓴다
 // type 은 변하지 않는값을 사용??
+// value 만 가져오고싶을때
 type imgCoords = typeof rspCoords[keyof typeof rspCoords];
+// key 만 가져오고싶을떄
+type imgCoords3 = keyof typeof rspCoords;
 // rspCoords 가 변하면 이값도 변해야 하므로 위의 방법이 더좋다
 type imgCoords2 = "0" | "-142px" | "-284px";
 
@@ -23,8 +26,9 @@ export default function CommonHook() {
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
   const inputEl = useRef<HTMLInputElement>(null);
-  // function 같은거 설정할때 useRef ex: setTimeout() 같은거 넣을때
+  // functiond 같은거 값을 설정할때 useRef ex: window.setTimeout() 같은거 넣을때
   const timeout = useRef<number | null>(null);
+
   // typescript 가 node의setTimeout인지 window의 setTimeout인지 헷갈리니까 명확히 적어준다 -> 안적음 에러
   timeout.current = window.setTimeout(() => {
   },2000); 
