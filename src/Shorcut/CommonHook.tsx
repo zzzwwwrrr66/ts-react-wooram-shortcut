@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react"
+import React, { useState, useRef, useCallback, FC } from "react"
 import CommonProps from "./commonProps";
 
 // 값뒤의 ! 는 값을 확신할때 사용 
@@ -76,6 +76,11 @@ export default function CommonHook() {
     return;
   }
 
+  // onClick 설정하고 싶을떄  => 버튼말고, 다른 태그에 사용 하고 싶을때 
+  const onClickRedo = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    
+  }, []); 
+
   
   
   return (
@@ -91,4 +96,8 @@ export default function CommonHook() {
     <button onClick={ ()=>testOnClick('test')}>btn</button>
     </>
   )
+}
+
+const Test = () => {
+
 }

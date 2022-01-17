@@ -7,6 +7,9 @@ import WordRelayHook from './view/WordRelay/Hook';
 import NumberBaseballHooks from './view/NumberBaseball/Hook';
 import NumberBaseballClass from './view/NumberBaseball/Class';
 import ResponseCheck from './view/ResponseCheck/Hooks';
+import LottoHooks from './view/Lotto/Hooks';
+import TicTacToe from './view/TicTacToe/TicTacToeHooks';
+
 function App() {
   return (
     <>
@@ -24,6 +27,9 @@ function App() {
       <NumberBaseballHooks/>
       <NumberBaseballClass/>
       <ResponseCheck/>
+
+      <LottoHooks/>
+      <TicTacToe/>
     </>
   );
 }
