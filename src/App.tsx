@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 import Gugudan from './view/Gugudan/Gugudan';
 import GugudanClass from './view/Gugudan/GugudanClass';
@@ -14,22 +15,22 @@ function App() {
   return (
     <>
       <h1>wooram ts</h1>
-      <Gugudan />
-      <GugudanClass />
-      <h2>WordRelay</h2>
-      <h3>WordRelay hook</h3>
-      <WordRelayHook />
-      <h3>WordRelay class</h3>
-      <WordRelayClass />
-
-      <h2>number baseball</h2>
-      <h3>WordRelayClassHooks</h3>
-      <NumberBaseballHooks/>
-      <NumberBaseballClass/>
-      <ResponseCheck/>
-
-      <LottoHooks/>
-      <TicTacToe/>
+      
+      <Router>
+        <nav>
+          <Link 
+          to={{
+            pathname: 'gugudan/123',
+            state: {
+              test: 'test'
+            }
+          }}
+          >gugudan</Link>
+        </nav>
+        <Switch>
+          <Route path='/gugudan/:id' component={Gugudan}></Route>
+        </Switch>
+      </Router>
     </>
   );
 }

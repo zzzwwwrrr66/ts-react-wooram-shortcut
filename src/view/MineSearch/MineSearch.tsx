@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, createContext, useMemo, Dispatch } from 'react';
 import Table from './Table';
 import Form from './Form';
+import './style.css';
 
 export const CODE = {
   MINE: -7,

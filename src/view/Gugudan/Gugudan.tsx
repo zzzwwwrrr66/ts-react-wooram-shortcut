@@ -1,5 +1,8 @@
 
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect,FC } from "react";
+import { useParams, useLocation, useHistory, useRouteMatch } from "react-router";
+import { RouteComponentProps } from "react-router";
+
 
 export default function Gugudan() {
 
@@ -8,6 +11,14 @@ export default function Gugudan() {
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
   const inputEl = useRef<HTMLInputElement>(null);
+  const params = useParams();
+  const location = useLocation();
+  const History = useHistory();
+  const routeMatch = useRouteMatch();
+  useEffect(()=>{
+    console.log(params, location, History, routeMatch);
+    
+  },[])
 
   const inputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);

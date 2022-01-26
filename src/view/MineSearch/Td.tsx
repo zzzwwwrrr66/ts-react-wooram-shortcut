@@ -78,7 +78,7 @@ const Td:FC<IProps> = memo(({ rowIndex, cellIndex }) => {
     }
   }, [tableData[rowIndex][cellIndex], halted]);
 
-  const onRightClickTd = useCallback((e) => {
+  const onRightClickTd = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     if (halted) {
       return;
@@ -107,9 +107,11 @@ const Td:FC<IProps> = memo(({ rowIndex, cellIndex }) => {
 });
 
 interface IpropsRearTd {
-  
+  onClickTd: ()=>void,
+  onRightClickTd: (e: React.MouseEvent) => void;
+  data: Codes
 }
-const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
+const RealTd = memo<IpropsRearTd>(({ onClickTd, onRightClickTd, data}) => {
   console.log('real td rendered');
   return (
     <td
